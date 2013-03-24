@@ -1,0 +1,97 @@
+\documentclass{beamer}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{microtype}
+
+% Package for Unicode math fonts
+\usepackage{unicode-math}
+
+% Figures
+\usepackage{caption}
+\captionsetup{labelformat=empty,labelsep=none}
+
+% FONT SETTINGS
+\usepackage{fontspec,xunicode}
+\setsansfont{Myriad Pro}                     % Set the primary sans serif font to be Myriad Pro
+\newfontfamily\myriadsb{Myriad Pro Semibold} % Define a command for selecting Myriad Pro elsewhere
+\setbeamerfont{title}{family=\myriadsb}      % Use this command to set the font of titles
+\setbeamerfont{frametitle}{family=\bf}       % Make frame titles bold
+
+
+% THEME SETTINGS
+% Select a minimalistic beamer theme
+\usecolortheme{seagull} 
+
+% Make itemize lists use a small square as default symbol on first level
+\setbeamertemplate{itemize item}{\raisebox{0.8mm}{\rule{1.2mm}{1.2mm}}}
+
+% Disable the beamer navigation buttons (they are pretty ugly and useless)
+\usenavigationsymbolstemplate{} 
+
+
+% Title page configuration
+\title{Presentation title}
+\subtitle{Subtitle}
+\author{Hans Hansen \and John Doe}
+\date{1st January 1970}
+\institute{Computer Science\\
+University of Copenhagen}
+
+
+
+\begin{document}
+
+% First slide with title, date, author information etc.
+\frame{\titlepage} 
+
+% Make an Agenda of all sections and subsections in the rest of the
+% slides.  
+%
+% The <handout:0> overlay specification hides this section when
+% compiling to a handout, which is done by \documentclass[handout]{beamer}
+\begin{frame}<handout:0>
+  \frametitle{Agenda}
+  \tableofcontents
+\end{frame}
+
+% These section titles are only for table of contents etc. You must
+% use \frametitle{} inside the slide to give the displayed title of
+% the slide.
+\section{Introduction}
+\begin{frame}
+  \frametitle{First slide: motivate the topic}
+
+  \begin{itemize}
+  \item This is slide \#1
+  \item It is not slide \#2
+  \item Or any other slide but slide \#1
+  \end{itemize}
+\end{frame} 
+
+
+\section{Analysis}
+\begin{frame}
+  \frametitle{Definitions}
+  % Definitions here
+  \begin{block}{Block title}
+    Here you could have some definition or something else that has to be highlighted
+  \end{block}
+\end{frame}
+
+\section{Implementation}
+\begin{frame}
+  \frametitle{Lorem ipsum}
+  Intentionally left blank
+\end{frame}
+
+
+\section{Conclusion}
+\begin{frame}
+  \frametitle{Default}
+  The quick brown fox jumps over the lazy dog
+\end{frame}
+
+\end{document}

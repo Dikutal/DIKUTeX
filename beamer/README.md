@@ -9,7 +9,7 @@ all the dependencies.
 List of templates
 -----------------
 
-* LuaTex-MyriadPro
+* LuaTeX-MyriadPro
   
   Minimalistic beamer template that uses LuaTex to employ OpenType
   fonts (OTF). See the README inside on how to install a new font.
@@ -29,3 +29,6 @@ in this repository:
   A beamer template imitating the style of the official PowerPoint
   template for the Faculty of SCIENCE.
   
+* http://deic.uab.es/~iblanes/beamer_gallery/
+
+  A gallery of the standard Beamer templates.
