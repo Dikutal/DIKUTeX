@@ -1,0 +1,146 @@
+\ProvidesPackage{ku-poster}
+\RequirePackage{etex}
+\RequirePackage[utf8x]{inputenc}          %text encoding
+\RequirePackage[danish,english,american]{babel}
+\RequirePackage{epsf,pstricks}
+
+% Switch off page numbers and section number on a poster
+\pagestyle{empty}
+\setcounter{secnumdepth}{0}
+
+% The textpos package is necessary to position textblocks at arbitary
+% places on the page.
+\RequirePackage[absolute]{textpos}
+\RequirePackage{graphics,wrapfig}
+\RequirePackage[urw-garamond]{mathdesign}
+
+% Font
+\RequirePackage{palatino}
+\RequirePackage{bera}                     % alternative monospace font
+\linespread{0.93}                     % palatino is best with more leading
+
+\RequirePackage{import}
+\RequirePackage{microtype}
+\RequirePackage{amsmath}
+\RequirePackage[sc]{mathpazo}
+\RequirePackage{color}
+\RequirePackage{wallpaper}
+\RequirePackage{sidecap} % side captions: \begin{SCfigure}[2.7][ht] ...
+\RequirePackage[small]{caption}
+\captionsetup{margin=0pt, labelfont=bf}
+\RequirePackage[caption=false,font=scriptsize]{subfig}
+\RequirePackage{soul}
+\RequirePackage{booktabs}
+\RequirePackage{tikz}
+\RequirePackage{environ}
+
+\definecolor{kugrey}{rgb}{.3984375,.3984375,.3984375}
+\definecolor{Shade}{HTML}{EAEBFE}
+\definecolor{DarkShade}{HTML}{D4D7FE}
+\definecolor{mehgrey}{rgb}{.70,.70,.70}
+
+% Letter spacing in KU logo text (uses soul package)
+\sodef\an{}{.13em}{0.6em plus1em}{0.13em plus.1em minus.1em}
+
+\def\title#1{\gdef\@title{#1}\gdef\THETITLE{#1}}
+\def\Department#1{\gdef\THEDEPARTMENT{\an{#1}}}
+\def\University#1{\gdef\THEUNIVERSITY{\an{#1}}}
+
+\Department{department of computer science}
+\University{university of copenhagen}
+
+\def\FormatTitle#1{\noindent{\fontsize{75}{110}\selectfont\bfseries #1}}
+\def\FormatDepartment#1{\noindent{\color{kugrey} \scshape \bfseries \huge \fontfamily{mdugm}\selectfont #1}}
+\def\FormatUniversity#1{\noindent{\fontsize{43pt}{60pt}\fontfamily{mdugm}\selectfont \color{kugrey} \scshape \bfseries  #1}}
+
+% Change section heading styles
+\RequirePackage{titlesec}
+\titleformat*{\section}{\fontsize{45}{50}\selectfont\bfseries}
+\titleformat*{\subsection}{\Large\bfseries}
+
+\def\Section#1{\noindent{\fontsize{45}{50}\selectfont \bfseries #1}\\}
+\def\Subsection#1{\noindent{\Large \bfseries #1}\\}
+
+
+
+\newcommand*{\Createtitle}[0]{
+  \ULCornerWallPaper{1.0}{ku-background.pdf}
+  \fontsize{40pt}{60pt}\selectfont
+  \begin{textblock}{100}(0,0)
+    \FormatDepartment{\THEDEPARTMENT}
+    \\
+    \FormatUniversity{\THEUNIVERSITY}
+  \end{textblock}
+  
+  \begin{textblock}{100}(0,7)
+    \FormatTitle{\THETITLE}
+  \end{textblock}
+
+  \linespread{1.075}\fontsize{28pt}{40pt}\selectfont
+}
+
+
+% Set up the grid
+%
+% Note that [40mm,40mm] is the margin round the edge of the page --
+% it is _not_ the grid size. That is always defined as
+% PAGE_WIDTH/HGRID and PAGE_HEIGHT/VGRID. In this case we use
+% 15 x 25. This gives us a wide central column for text (7 grid
+% spacings) and two narrow columns (3 each) at each side for
+% pictures, separated by 1 grid spacing.
+%
+% Note however that texblocks can be positioned fractionally as well,
+% so really any convenient grid size can be used.
+%
+\TPGrid[30mm,40mm]{100}{100}  % 3 - 1 - 7 - 1 - 3 Columns
+
+
+\newlength{\GridBlockBorderWidth}
+\setlength{\GridBlockBorderWidth}{1mm}
+\newlength{\GridBlockMargin}
+\setlength{\GridBlockMargin}{60pt}
+\NewEnviron{GridBlock}[3]{
+\begin{textblock}{#3}(#1,#2)
+\begin{tikzpicture}
+\node[fill=white, rounded corners=20pt, inner sep=\GridBlockMargin,draw=mehgrey,line width=\GridBlockBorderWidth]{
+\begin{minipage}{\textwidth-2\GridBlockMargin}
+\BODY
+\end{minipage}
+};
+\end{tikzpicture}
+\end{textblock}
+}
+
+\NewEnviron{GridBlockFill}[3]{
+\begin{textblock}{#3}(#1,#2)
+\begin{tikzpicture}
+\node[fill=Shade, rounded corners=0pt, inner sep=\GridBlockMargin]{
+\begin{minipage}{\textwidth-2\GridBlockMargin}
+\BODY
+\end{minipage}
+};
+\end{tikzpicture}
+\end{textblock}
+}
+\NewEnviron{GridBlockBlank}[3]{
+\begin{textblock}{#3}(#1,#2)
+\begin{tikzpicture}
+\node[rounded corners=20pt, inner sep=\GridBlockMargin]{
+\begin{minipage}{\textwidth-2\GridBlockMargin}
+\BODY
+\end{minipage}
+};
+\end{tikzpicture}
+\end{textblock}
+}
+
+\def\smaller#1{{\fontsize{25}{25}\selectfont #1}}
+\NewEnviron{compact}{
+{\linespread{1.398} \fontsize{35}{35}\selectfont%
+\BODY%
+}%
+}
+
+\parindent=0pt
+\parskip=0.5\baselineskip
+
